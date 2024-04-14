@@ -1,21 +1,29 @@
 
 class Player {
-    constructor(logicFunction) {
+    constructor(logic) {
         this.Point = 0;
-        this.last_Action = "Null";
-        this.logic = logicFunction;
+        this.last_Action = Null;
+        this.logic = logic;
     }
 }
 
 
 let player_1 = new Player(
     function logic() {
-        return false;
+
+        let response = true
+        player_1.last_Action = response;
+
+        return response;
     });
 
 let player_2 = new Player(
     function logic() {
-        return true;
+
+        let response = false
+        player_2.last_Action = response;
+
+        return response;
     }
 );
 
@@ -47,10 +55,10 @@ function Game() {
 
         }
 
-        console.log("Turno: "+(i+1));
+        console.log("Turno: " + (i + 1));
         console.log("Player: 01: " + player1 + "  Puntos: " + player_1.Point);
         console.log("Player: 02: " + player2 + "  Puntos: " + player_2.Point);
-        
+
 
     }
 
