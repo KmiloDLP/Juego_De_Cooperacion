@@ -2,69 +2,72 @@
 class Player {
     constructor(logic) {
         this.Point = 0;
-        this.last_Action = Null;
+        this.last_Action = "Null";
         this.logic = logic;
     }
 }
 
 
-let player_1 = new Player(
+let player_0 = new Player(
     function logic() {
 
-        let response = true
-        player_1.last_Action = response;
+        //logica aleatoria
+        let response = Math.random() < 0.5;
+
+        player_0.last_Action = response;
 
         return response;
     });
 
-let player_2 = new Player(
+let player_1 = new Player(
     function logic() {
 
-        let response = false
-        player_2.last_Action = response;
+        //logica aleatoria
+        let response = Math.random() < 0.5;
+
+        player_1.last_Action = response;
 
         return response;
     }
 );
 
 
-function Game() {
+function Game(player1, player2) {
 
     for (let i = 0; i < 5; i++) {
 
-        let player1 = player_1.logic();
-        let player2 = player_2.logic();
+        let answer1 = player1.logic();
+        let answer2 = player2.logic();
 
-        if (player1 && player2) {
+        if (answer1 && answer2) {
 
-            player_1.Point += 3;
-            player_1.Point += 3;
+            player1.Point += 3;
+            player2.Point += 3;
 
-        } else if (!player1 && player2) {
+        } else if (!answer1 && answer2) {
 
-            player_1.Point += 5;
+            player1.Point += 5;
 
-        } else if (player1 && !player2) {
+        } else if (answer1 && !answer2) {
 
-            player_2.Point += 5;
+            player2.Point += 5;
 
-        } else if (!player1 && !player2) {
+        } else if (!answer1 && !answer2) {
 
-            player_1.Point += 1;
-            player_2.Point += 1;
+            player1.Point += 1;
+            player2.Point += 1;
 
         }
 
         console.log("Turno: " + (i + 1));
-        console.log("Player: 01: " + player1 + "  Puntos: " + player_1.Point);
-        console.log("Player: 02: " + player2 + "  Puntos: " + player_2.Point);
-
+        console.log("Player: 01:  Coperacion: "+answer1 +"  Puntos: " + player_0.Point);
+        console.log("Player: 02:  Coperacion: "+answer2 +"  Puntos: " + player_1.Point);
 
     }
 
 }
 
-Game();
+Game(player_0, player_1);
 
 
 
