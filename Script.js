@@ -1,4 +1,3 @@
-
 class Player {
     constructor(logic) {
         this.Point = 0;
@@ -7,67 +6,83 @@ class Player {
     }
 }
 
+const players = {
+    player_2: new Player(function logic() {
 
-let player_0 = new Player(
-    function logic() {
-
-        //logica aleatoria
-        let response = Math.random() < 0.5;
-
-        player_0.last_Action = response;
-
+        let response = false;
         return response;
-    });
+        
+    }),
+    player_0: new Player(function logic() {
 
-let player_1 = new Player(
-    function logic() {
+        function randomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+          }
 
-        //logica aleatoria
-        let response = Math.random() < 0.5;
+        let response = randomNumber(0,1);
+        return Boolean(response);
 
-        player_1.last_Action = response;
+    }),
+    player_1: new Player(function logic() {
 
+        let response = false;
         return response;
-    }
-);
 
+    })
+};
 
 function Game(player1, player2) {
-
-    for (let i = 0; i < 5; i++) {
-
+    for (let i = 0; i < 10; i++) {
         let answer1 = player1.logic();
         let answer2 = player2.logic();
 
         if (answer1 && answer2) {
-
             player1.Point += 3;
             player2.Point += 3;
-
         } else if (!answer1 && answer2) {
-
             player1.Point += 5;
-
         } else if (answer1 && !answer2) {
-
             player2.Point += 5;
-
         } else if (!answer1 && !answer2) {
-
             player1.Point += 1;
             player2.Point += 1;
-
         }
 
         console.log("Turno: " + (i + 1));
-        console.log("Player: 01:  Coperacion: "+answer1 +"  Puntos: " + player_0.Point);
-        console.log("Player: 02:  Coperacion: "+answer2 +"  Puntos: " + player_1.Point);
-
+        console.log("Player 01:  Coperacion: " + answer1 + "  Puntos: " + player1.Point);
+        console.log("Player 02:  Coperacion: " + answer2 + "  Puntos: " + player2.Point);
     }
+}
+
+function Turn(players) {
+
+    const playerKeys = Object.keys(players);
+
+    for (let i = 0; i < playerKeys.length; i++) {
+
+        const player1 = players[playerKeys[i]];
+
+        for (let j = i + 1; j < playerKeys.length; j++) {
+
+            const player2 = players[playerKeys[j]];
+            console.log(`Enfrentamiento: ${playerKeys[i]} vs ${playerKeys[j]}`);
+            Game(player1, player2);
+            console.log("-----------------------");
+
+        }
+    }
+
+    playerKeys.forEach(playerKey => {
+        const player = players[playerKey];
+        console.log(`${playerKey}: Puntos totales: ${player.Point}`);
+    });
+
 
 }
 
-Game(player_0, player_1);
+Turn(players);
+
+
 
 
 

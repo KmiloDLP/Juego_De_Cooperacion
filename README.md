@@ -8,7 +8,6 @@ En este juego, dos bots con lógicas de decisión deben determinar si cooperan o
 - **Regla 2:** Si solo uno de los bots no coopera, este obtendrá 5 puntos mientras que el otro bot no recibirá puntos.
 - **Regla 3:** Si ninguno de los dos bots coopera, ambos recibirán 1 punto.
 
-El objetivo del juego es acumular la mayor cantidad de puntos posibles al final de una serie de rondas.
 
 ## Lógica de los Bots
 
@@ -21,7 +20,10 @@ Además, la lógica del bot puede acceder a los atributos del bot rival si es ne
 
 ## Ganador
 
-El jugador que acumule la mayor cantidad de puntos al final de todas las rondas será declarado como el ganador.
+
+-  Dependiendo de la cantidad de jugadores se establecera un puntaje minimo.
+- El jugador que acumule la mayor cantidad de puntos y supere el putaje minimo sera el ganador
+
 
 ¡Que gane el mejor estratega!
 
