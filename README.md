@@ -8,4 +8,4 @@ Dos bot con logicas de decision deben decidir si coperar o no coperar,
 
 # quien tenga al final mas puntos gana
 # La logica de los bot debe retornar un booleano "true" si coperan "false" si no coperan
-
+# La logica puede aceder a los atributos del Bot rival si es necesario
