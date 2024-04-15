@@ -21,7 +21,7 @@ Además, la lógica del bot puede acceder a los atributos del bot rival si es ne
 ## Ganador
 
 
--  Dependiendo de la cantidad de jugadores se establecera un puntaje minimo.
+-  Dependiendo de la cantidad de jugadores se establecera un puntaje minimo. el cual sera 10 y aumentara en 10 por cada nuevo participante
 - El jugador que acumule la mayor cantidad de puntos y supere el putaje minimo sera el ganador
 
 

@@ -18,12 +18,6 @@ const players = {
         let response = false;
         return response;
 
-    }),
-    player_2: new Player(function logic() {
-
-        let response = false;
-        return response;
-
     })
 };
 
