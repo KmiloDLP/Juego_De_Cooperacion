@@ -7,23 +7,19 @@ class Player {
 }
 
 const players = {
-    player_2: new Player(function logic() {
+
+    player_0: new Player(function logic() {
+ 
+        let response = Math.random() < 0.5;
+        return response;
+    }),
+    player_1: new Player(function logic() {
 
         let response = false;
         return response;
-        
-    }),
-    player_0: new Player(function logic() {
-
-        function randomNumber(min, max) {
-            return Math.random() * (max - min) + min;
-          }
-
-        let response = randomNumber(0,1);
-        return Boolean(response);
 
     }),
-    player_1: new Player(function logic() {
+    player_2: new Player(function logic() {
 
         let response = false;
         return response;
