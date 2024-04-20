@@ -1,0 +1,15 @@
+{
+  "name": "coop-bots-game",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:AndresMorelos/coop-bots-game.git",
+  "author": "Andres Morelos <6563162+AndresMorelos@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}

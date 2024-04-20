@@ -2,15 +2,20 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
-  </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game</title>
+</head>
 
 <body>
 
-    
-    <script src="Script.js"></script>
+  <input id="roomName" type="text" placeholder="Room Name">
+  <button id="createRoom">Create Room</button>
+
+  <input id="roomUUID" type="text" placeholder="Room UUID">
+  <button id="joinRoom">Join Room</button>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
