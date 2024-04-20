@@ -1,80 +1,62 @@
-class Player {
-    constructor(logic) {
-        this.Point = 0;
-        this.last_Action = "Null";
-        this.logic = logic;
-    }
-}
 
-const players = {
 
-    player_0: new Player(function logic() {
- 
-        let response = Math.random() < 0.5;
-        return response;
-    }),
-    player_1: new Player(function logic() {
+const socket = io('http://192.168.31.204:3001/');
+let roomIdentifier = '';
 
-        let response = false;
-        return response;
+socket.on('connect', () => {
+    console.log('Connected to server');
+});
 
-    })
-};
+socket.on('disconnect', () => {
+    console.log('Disconnected from server');
+});
 
-function Game(player1, player2) {
-    for (let i = 0; i < 10; i++) {
-        let answer1 = player1.logic();
-        let answer2 = player2.logic();
+socket.on('startGame', () => {
+    console.log('Game started');
+    console.log('Sending first turn', roomIdentifier)
+    const handleTurn = async () => {
+        await new Promise(resolve => {
+            const interval = setInterval(() => {
+                if (roomIdentifier) {
+                    clearInterval(interval);
+                    resolve();
+                }
+            }, 1000);
+        });
+        socket.emit('handleTurn', roomIdentifier, botLogic());
+    };
 
-        if (answer1 && answer2) {
-            player1.Point += 3;
-            player2.Point += 3;
-        } else if (!answer1 && answer2) {
-            player1.Point += 5;
-        } else if (answer1 && !answer2) {
-            player2.Point += 5;
-        } else if (!answer1 && !answer2) {
-            player1.Point += 1;
-            player2.Point += 1;
-        }
+    handleTurn();
+});
 
-        console.log("Turno: " + (i + 1));
-        console.log("Player 01:  Coperacion: " + answer1 + "  Puntos: " + player1.Point);
-        console.log("Player 02:  Coperacion: " + answer2 + "  Puntos: " + player2.Point);
-    }
-}
+socket.on('nextTurn', () => {
+    console.log('Next turn');
+    socket.emit('handleTurn', roomIdentifier, botLogic());
+});
 
-function Turn(players) {
+socket.on('gameOver', (players) => {
+    console.log('Game over', players);
+});
 
-    const playerKeys = Object.keys(players);
-
-    for (let i = 0; i < playerKeys.length; i++) {
-
-        const player1 = players[playerKeys[i]];
-
-        for (let j = i + 1; j < playerKeys.length; j++) {
-
-            const player2 = players[playerKeys[j]];
-            console.log(`Enfrentamiento: ${playerKeys[i]} vs ${playerKeys[j]}`);
-            Game(player1, player2);
-            console.log("-----------------------");
-
-        }
-    }
-
-    playerKeys.forEach(playerKey => {
-        const player = players[playerKey];
-        console.log(`${playerKey}: Puntos totales: ${player.Point}`);
+document.getElementById('createRoom').addEventListener('click', () => {
+    console.log('Creating room')
+    let roomName = document.getElementById('roomName').value;
+    socket.emit('createRoom', roomName, (room) => {
+        console.log('Room created', room);
+        roomIdentifier = room.uuid;
     });
+});
 
+document.getElementById('joinRoom').addEventListener('click', () => {
+    console.log('Joining room')
+    let roomUUID = document.getElementById('roomUUID').value;
+    socket.emit('joinRoom', roomUUID, (room) => {
+        console.log('Room joined', room);
+        roomIdentifier = room.uuid;
+    });
+});
 
+function botLogic() {
+    return Math.random() >= 0.5;
 }
-
-Turn(players);
-
-
-
-
-
-
 
